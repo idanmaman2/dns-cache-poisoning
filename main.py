@@ -31,7 +31,6 @@ def throworkill(packet,name):
     if checkpacket(packet, name):
         ...
     else:
-        print("cool")
         packet[Ether].src = options["routerMac"]
         packet[Ether].dst = options["dnsmac"]
         packet[Ether].show()
@@ -72,12 +71,7 @@ def main()->None:
 
     #sniffing dns messages
     sniff(
-        lfilter= lambda x : IP in x and x[IP].dst == options["dnsaddr"] , prn = lambda x : throworkill(x,options["name"]) )
-
-
-
-
-
+        lfilter= lambda x : DNS in x and x[IP].dst == options["dnsaddr"] , prn = lambda x : throworkill(x,options["name"]) )
     tr.join()
 
 

