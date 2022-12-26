@@ -1,9 +1,28 @@
-# dns cache poisoning
-# notes: 
+# DNS cache poisoning
+## notes: 
   * the poisoning tool is waiting for an active query from any client that using in the dns server - (to be efficent - if the name is already in the cache) 
   * run the script as sudo 
   * shut down the ip forwarding 
   
+ ## dns server building : 
+  * `sudo apt-get update`
+  * `sudo apt install bind9`
+  * `sudo nano /etc/bind/named.conf.options`
+    
+    change to those settings : 
+    `//dnssec-validation auto;
+      dnssec-enable: no;
+      send-cookie no;
+      answer-cookie no`
+   * `sudo service named start`
+   * check the status of the server to check out the setup : `sudo service named status`
+   
+   to re-config : 
+   * `sudo rndc reconfig`
+   
+   to clear the dns server cache: 
+   * `sudo rndc flush`
+      
 # example:
 I changed "youtube.com" address to my kali vm address in the dns cache  and then tried to connect from another machine which it's default dns server is the corrupted dns server 
 
