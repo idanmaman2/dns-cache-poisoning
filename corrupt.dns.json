@@ -1,0 +1,10 @@
+{
+    "currupt": [
+        {
+            "name": "youtube.com",
+            "addr": "10.100.102.183"
+        }
+     
+    ],
+    "ttl": 10
+}
