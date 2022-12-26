@@ -13,4 +13,4 @@ I changed "youtube.com" address to my kali vm address in the dns cache  and then
 <img width="648" alt="Screenshot 2022-12-26 at 21 15 31" src="https://user-images.githubusercontent.com/90776557/209577889-567a878a-1154-427c-b308-a059bc7ce748.png">
 <img width="330" alt="Screenshot 2022-12-26 at 21 15 27" src="https://user-images.githubusercontent.com/90776557/209577891-663f043a-9752-4b70-a18d-21b741d1b9c4.png">
 
-by : Idan Maman
+by : Idan.M
